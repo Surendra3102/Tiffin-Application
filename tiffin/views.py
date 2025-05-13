@@ -80,6 +80,7 @@ def place_order(request):
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 
-
-
+def home(request):
+    return JsonResponse({"message": "Tiffin API is running"})
