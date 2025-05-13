@@ -3,10 +3,13 @@ import dj_database_url
 from .settings import *
 from .settings import BASE_DIR
 
-ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+hostname = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
-CSRF_TRUSTED_ORIGINS = ['https://' + os.environ.get('RENDER_EXTERNAL_HOSTNAME')]
+ALLOWED_HOSTS = ['tiffin-application.onrender.com']
+if hostname:
+    ALLOWED_HOSTS.append(hostname)
 
+CSRF_TRUSTED_ORIGINS = [f'https://{hostname}'] if hostname else ['https://tiffin-application.onrender.com']
 DEBUG = False
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
