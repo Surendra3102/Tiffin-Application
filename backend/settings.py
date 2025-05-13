@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jy)mfv1m@z^7$&2n3)z-8+y%&71_xx&9gu6zlfn#n)9wxjxqr1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tiffin-application.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
