@@ -32,14 +32,7 @@ MIDDLEWARE = [
 ]
 
 
-STORAGES = {
-    'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage',
-    },
-        'staticfiles': {
-        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-    }
-}
+
 
 DATABASES = {
     'default':dj_database_url.config(
@@ -47,3 +40,6 @@ DATABASES = {
         conn_max_age=600
     )
 }
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
