@@ -140,11 +140,11 @@ ENVIRONMENT = os.getenv("DJANGO_ENV", "development")
 
 if ENVIRONMENT == "production":
     CORS_ALLOWED_ORIGINS = [
-        "https://your-frontend.onrender.com",  # Replace with actual frontend domain
+        "https://tiffin-application-frontend.onrender.com",  # Replace with actual frontend domain
     ]
 
     CSRF_TRUSTED_ORIGINS = [
-        "https://your-frontend.onrender.com",
+        "https://tiffin-application-frontend.onrender.com",
     ]
 else:
     # Development settings (localhost etc.)
