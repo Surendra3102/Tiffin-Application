@@ -135,28 +135,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 import os
 
-# Set environment mode: 'development' or 'production'
-ENVIRONMENT = os.getenv("DJANGO_ENV", "development")
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://tiffin-application-frontend.onrender.com",
+]
 
-if ENVIRONMENT == "production":
-    CORS_ALLOWED_ORIGINS = [
-        "https://tiffin-application-frontend.onrender.com",  # Replace with actual frontend domain
-    ]
-
-    CSRF_TRUSTED_ORIGINS = [
-        "https://tiffin-application-frontend.onrender.com",
-    ]
-else:
-    # Development settings (localhost etc.)
-    CORS_ALLOWED_ORIGINS = [
-        "http://localhost:5173",  # Vite default
-        "http://127.0.0.1:5173",
-    ]
-
-    CSRF_TRUSTED_ORIGINS = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://tiffin-application-frontend.onrender.com",
+]
+CORS_ALLOW_CREDENTIALS = True
 
 
 
