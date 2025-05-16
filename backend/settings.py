@@ -133,8 +133,33 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+import os
+
+# Set environment mode: 'development' or 'production'
+ENVIRONMENT = os.getenv("DJANGO_ENV", "development")
+
+if ENVIRONMENT == "production":
+    CORS_ALLOWED_ORIGINS = [
+        "https://your-frontend.onrender.com",  # Replace with actual frontend domain
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        "https://your-frontend.onrender.com",
+    ]
+else:
+    # Development settings (localhost etc.)
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173",  # Vite default
+        "http://127.0.0.1:5173",
+    ]
+
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ]
+
+
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
