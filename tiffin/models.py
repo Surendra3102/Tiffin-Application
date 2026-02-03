@@ -24,8 +24,10 @@ class MenuItem(models.Model):
 class Order(models.Model):
     STATUS_CHOICES = (
         ('PENDING', 'Pending'),
-        ('READY', 'Ready'),
-        ('COMPLETED', 'Completed'),
+        ('ACCEPTED YOUR ORDER', 'Accepted your order'),
+        ('REJECTED YOUR ORDER', 'Rejected your order'),
+        ('PREPARING', 'Preparing'),
+        ('READY FOR TAKE', 'Ready for take'),
     )
     
     PAYMENT_CHOICES = [
@@ -35,9 +37,9 @@ class Order(models.Model):
     
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='PENDING')
     created_at = models.DateTimeField(auto_now_add=True)
-    payment_method = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default='cash')
+    payment_method = models.CharField(max_length=30, choices=PAYMENT_CHOICES, default='cash')
 
     def __str__(self):
         return f"Order {self.id} by {self.user.username}"
@@ -49,3 +51,14 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.menu_item.name}"
+
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.message[:30]}"

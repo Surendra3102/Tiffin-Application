@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import MenuItem, Order, OrderItem, UserProfile
+from .models import MenuItem, Order, OrderItem, UserProfile, Notification
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -79,3 +79,22 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return user
 
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ['id', 'message', 'created_at']
+        
+        
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        data['user'] = {
+            'id': self.user.id,
+            'username': self.user.username,
+            'is_staff': self.user.is_staff,
+            'is_superuser': self.user.is_superuser,
+        }
+        return data
